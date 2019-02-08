@@ -6,7 +6,7 @@ export default class extends Component {
     return (
       <Fragment>
         <Header />
-        <h1> TEST </h1>
+
         <Exercises />
         <Footer />
       </Fragment>
