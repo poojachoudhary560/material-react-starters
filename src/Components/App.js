@@ -5,7 +5,7 @@ import { muscles, exercises } from "../store.js";
 export default class extends Component {
   state = {
     exercises,
-    category: "shoulders"
+    exercise: {}
   };
   getExercisesByMuscles() {
     return Object.entries(
@@ -28,15 +28,25 @@ export default class extends Component {
       () => console.log("category selected " + this.state.category)
     );
   };
+  handleExerciseSelected = id => {
+    this.setState(({ exercises }) => ({
+      exercise: exercises.find(ex => ex.id === id)
+    }));
+  };
   render() {
     console.log(this.getExercisesByMuscles());
     const exercises = this.getExercisesByMuscles(),
-      { category } = this.state;
+      { category, exercise } = this.state;
     return (
       <Fragment>
         <Header />
 
-        <Exercises exercises={exercises} />
+        <Exercises
+          exercise={exercise}
+          category={category}
+          exercises={exercises}
+          onSelect={this.handleExerciseSelected}
+        />
         <Footer
           category={category}
           muscles={muscles}
