@@ -8,7 +8,10 @@ import {
   ListItemLink,
   ListItemText
 } from "@material-ui/core/";
-
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
+import Delete from "@material-ui/icons/Delete";
+import Edit from "@material-ui/icons/Edit";
 const styles = {
   Paper: {
     padding: 20,
@@ -26,7 +29,9 @@ export default ({
     id,
     title = "Welcome!",
     description = "Please select an exercise from the list on the left."
-  }
+  },
+  onDelete,
+  onSelectEdit
 }) => (
   <Grid container>
     <Grid item xs>
@@ -44,6 +49,14 @@ export default ({
                 {exercises.map(({ id, title }) => (
                   <ListItem key={id} button onClick={() => onSelect(id)}>
                     <ListItemText primary={title} />
+                    <ListItemSecondaryAction>
+                      <IconButton onClick={() => onSelectEdit(id)}>
+                        <Edit />
+                      </IconButton>
+                      <IconButton onClick={() => onDelete(id)}>
+                        <Delete />
+                      </IconButton>
+                    </ListItemSecondaryAction>
                   </ListItem>
                 ))}
               </List>
